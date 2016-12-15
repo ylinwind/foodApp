@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>foodDetail</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bhip8554sm4bcsor.css">
+	<script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="lib/js/swiper.min.js"></script>
+</head>
+<body>
+	<header class="detailHead">
+	</header>
+	<section class="foodImg"></section>
+	<section class="intro">
+	</section>
+	<section class="needs">
+	</section>
+	<section class="step">
+	</section>
+	<section class="content">
+		<form action="" method="get">
+			<label for="talk">我要评论:</label>
+			<textarea name="talk" id="talk" placeholder="写下您的想法吧~"></textarea>
+			<button>发表评论</button>
+		</form>
+	</section>
+	<section class="netFri">
+		<h3>网友评论</h3>
+	</section>
+	<script type="text/javascript">
+	/**********************************/
+		var key = location.search.slice(1).split("=");
+		console.log(key);
+		var id = key[1],
+			data = "http://apis.juhe.cn/cook/queryid?key=b52e6b0ad30cb22d0c43cf85a29d96ca&id="
+			+id+"";
+		$.ajax({
+			url: 'ajax.php',
+			type: 'GET',
+			dataType: 'json',
+			data: {data: data},
+			success : function(json){
+				var res = json.result.data, stepStr = "",foodImg ="",intro = "",things = "",tit = "";
+				for(var i = 0 ; i < res.length;i++){
+					if (res[i].id===key[1]) {
+						tit = `<a href="food.html" class="icon iconfont icon-Back"></a>
+								<h3>${res[i].title}</h3>`;
+						foodImg = `<img src=${res[i].albums[0]} alt="foodDetail">`;
+						intro = `<p>${res[i].tags}</p>`;
+						var step = res[i].steps;
+						for(var j =  0; j < step.length;j++){
+							stepStr +=	`<div>
+										<img src=${step[j].img} alt="">
+										<h2>${step[j].step}</h2>
+									</div>`;
+						}
+						var needs = res[i].ingredients.split(";");
+						for(var k = 0 ; k < needs.length; k++){
+							var evr = needs[k].split(",");
+							console.log(needs[k]);
+							things += `<p><span>${evr[0]}</span><span>${evr[1]}</span></p>`;
+						}
+						things = "<h3>材料</h3>"+things;
+					}
+				}
+				$("header").html(tit);
+				$(".needs").html(things);
+				$(".intro").html(intro);
+				$(".foodImg").html(foodImg);
+				$(".step").html(stepStr);
+			}
+		});
+		var fs = document.documentElement.clientWidth/6.4;
+		console.log(fs);
+		document.getElementsByTagName("html")[0].style.fontSize=fs+"px";
+	</script>
+</body>
+</html>

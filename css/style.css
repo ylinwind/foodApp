@@ -1,0 +1,110 @@
+/*html{font-size: 100px;}*/
+body{background: #F2F2F2;}
+a{text-decoration: none;}
+header{display: flex;justify-content: space-around;align-items:center;position: relative;
+	font-size: 0.30rem;height:44px;background: #FC7071;font-weight: 600;}
+header a{color: #fff;height: 100%;line-height: 44px;}
+header em{position: absolute;bottom: 0;display: block;height: 3px;background: #fff;
+	}
+/*header a.active{border-bottom: 2px solid #fff;}*/
+.blank{height: 44px;}
+.side{width: 50%;height: 100%;background: #ccc;position: fixed;left: -50%;z-index: 2;}
+/****************/
+.banner{background: url(../imgs/bannerBg.jpg);background-size:100%;}
+.slideItem img{width: 30vw;}
+.ser {display: flex;justify-content: center;align-items: center;padding: 5px;
+	border-bottom: 1px solid #ccc;position: relative;}
+.iconSer{position: absolute;left: 0.7rem;top: 0.13rem;color: #999;}
+.ser input{font-size: 0.16rem;width: 80vw;padding:2px;border-radius: 2px;
+	border:1px solid #999;text-indent: 0.4rem;}
+.list{overflow: hidden;background: url(../imgs/titBg.png) center right no-repeat;
+	background-size: cover;position: relative;}
+.list span{position: absolute;right: 0;top: 0;color: #f00;font-size: 1rem;}
+.list ul{padding:10px;margin:0;}
+.list li{display: flex;justify-content: space-between;align-items: center;
+	margin-bottom: 10px;background:rgba(255,255,255,0.8);padding:5px;}
+.list li a{font-size: 0;}
+.list li img{width: 1.5rem;}
+.list li div{width: 65vw;}
+.list li h2{font-size: 0.28rem;white-space: nowrap; text-overflow: ellipsis;
+	overflow: hidden;color: #333;}
+.list li p{font-size: 0.16rem;color: #666;}
+
+footer{height: 44px;position: fixed;bottom: 0;width: 100vw;background: #fff;
+	border-top: 1px solid #ccc;}
+footer div{display: flex;justify-content: space-around;align-items: center;height: 100%;}
+footer div a{color: #999;font-size: 5rem}
+
+/****************foodDetail*******/
+.detailHead{position: relative;}
+.detailHead button{position: absolute;right: 0.1rem;border:none;padding:0.1rem;
+	background: none;color: #fff;}
+.detailHead a{position: absolute; left: 0.1rem; top: 0;font-size: 0.5rem;}
+.detailHead h3{color: #fff;font-size: 0.28rem;}
+.foodImg{text-align: center;}
+.foodImg h3{font-size: 0.32rem;color: #333;}
+.foodImg img{width: 100vw;height: 3rem;}
+.step{text-align: center;border-bottom: 1px solid #ccc;padding-bottom: 0.2rem;}
+.step h2{font-size: 0.20rem;font-weight: normal;color: #666;}
+.intro p{font-size: 0.16rem;color: #666;padding:0 15px;}
+.needs p{display: flex;justify-content: space-around;padding:0 15px;font-size: 0.16rem;
+	color: #666;}
+.needs h3{font-size: 0.24rem;text-align: center;color: #333;}
+.content{overflow: hidden;padding-right: 15px;margin-bottom: 0.2rem;}
+.content form{font-size: 0.16rem;padding:10px 5px;}
+.content label{font-size: 0.30rem;color: #666;}
+.content textarea{width: 90vw;height:15vh;font-size: 0.24rem;margin:0.1rem 0;
+	color: #666;}
+.content button{border:none;font-size: 0.28rem;background: #3879D9;color: #fff;
+	padding:5px 10px;border-radius: 5px;float: right;}
+.netFri{background: lightblue;height: 1rem;font-size: 0.2rem;}
+
+/*************foodKind*************/
+.foodKind{padding:10px;font-size: 0.2rem;padding-top: 0;}
+.foodKind li{background: #fff;}
+.kindTit{display: flex;justify-content: space-between;font-size: 0.2rem;
+	border-bottom: 1px solid #ccc;padding-bottom: 5px;}
+.kindTit a{color: #666;}
+.kindTit a span{color: #f00;margin-left: 0.2rem;}
+.chuanList ul{display:flex;justify-content: space-around; margin:0;padding:0;
+	flex-wrap: wrap;}
+.chuanList li{font-size: 0.2rem;list-style: none;margin-bottom: 0.1rem;position: relative;}
+.chuanList li img{width: 20vw;}
+.chuanList li span{position: absolute;font-size: 0.12rem;left: 50%;top: 50%;
+	transform: translateX(-50%);color: #fff;width: 20vw;display: block;text-align: center;}
+.yueList ul{padding: 0;}
+.yueList li{display: flex;justify-content: space-between;font-size: 0.2rem;
+	padding: 0.2rem 0.1rem;margin-bottom: 0.1rem;}
+.yueList li img{width:20vw;}
+.yueList div{padding:0 5px;}
+.yueList h3{overflow: hidden;margin:0;color: #333;text-overflow: ellipsis;
+	white-space: nowrap;width: 60vw;}
+.yueList p{height: 0.51rem;overflow: hidden;font-size: 0.16rem;color: #666;}
+/*****************/
+.more{display: flex;justify-content: center;align-items: center;padding-bottom: 0.2rem;}
+.more button{width: 90vw;padding:0.15rem;border:1px solid #FA6650;border-radius: 5px;
+		font-size: 0.3rem;color: #fff;text-align: center;background: #fff;color: #FA6650;
+		}
+/*******************************foodKinds**************/
+#serId{font-size: 0.16rem;font-weight: normal;border:none;width: 70vw;height: 28px;border-radius: 0.1rem;background: #fff;display: flex;
+	justify-content: center;align-items: center;outline: none;overflow: auto;cursor: pointer;}
+#serId span{text-align: center;display:block;color: #333;border:1px solid #ccc;padding:0.05rem 0.2rem;
+	border-radius: 3px;height: 0.24rem;position: relative;margin-right: 0.2rem;}
+#serId span em{position: absolute;right: -0.1rem;top: -0.05rem;color: #666;}
+.typeList{border-bottom: 1px solid #ccc;}
+.typeList ul{overflow: hidden; padding:0;padding:0 15px;margin:0.5rem 0 0.2rem 0;}
+.typeList ul li{width: 26vw;list-style: none;float: left;font-size: 0.24rem;margin-right: 0.16rem;text-align: left;color: #333;}
+.typeList ul li span{margin-right: 0.1rem;}
+.egList ul{display:flex;justify-content: space-around; margin:0;padding:0;
+			flex-wrap: wrap;align-items: center;}
+.egList ul li{font-size: 0.2rem;list-style: none;margin-bottom: 0.1rem;position: relative;}
+.egList ul li img{width: 24vw;}
+.egList ul li span{position: absolute;font-size: 0.12rem;left: 50%;top: 50%;
+transform: translateX(-50%);color: #fff;width: 20vw;display: block;text-align: center;}
+.egList h3{font-size: 0.24rem;color: #333;font-weight: 600;}
+
+@keyframes ani{
+	
+}
+
+	

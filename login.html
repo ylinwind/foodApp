@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>login</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<style type="text/css">
+		html,body{height: 100%;width: 100%;}
+		html{font-size: 15.625vw;}
+		body{background: url(imgs/cook.jpg);background-size: cover;}
+		.loginCent{height: 100%;width: 100%;background: rgba(200,200,200,0.3);display: flex;
+			justify-content: center;align-items: center;position: relative;/*overflow: hidden;*/}
+		.login{display: flex;justify-content: center;align-items: center;flex-wrap: wrap;}
+		.login input{border:none;background: none;color: #fff;border-bottom: 1px solid #fff;
+			width: 70vw;font-size: 6vw;outline: none;padding:3vw;}
+		input::-webkit-input-placeholder{color: #333;}
+		.login button,.regist{background:rgba(10,86,200,0.5);border:none;color: #fff;font-size: 6vw;padding:2vw 5vw;border-radius: 10px;}
+		#reg{position: absolute;transform: translateX(100%);}
+	</style>
+	<script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="lib/touch.min.js"></script>
+</head>
+<body>
+	<section class="loginCent">
+		<form class="login">
+			<input type="text" name="username" placeholder="请输入用户名">
+			<input type="password" name="password" placeholder="请输入密码">
+			<p>
+				<button>登录</button>
+				<a class="regist">注册</a>
+			</p>
+		</form>
+		<form class="login" id="reg">
+			<input type="text" name="username" placeholder="请输入用户名">
+			<input type="password" name="password" placeholder="请输入密码">
+			<p>
+				<button>立即注册</button>
+			</p>
+		</form>
+	</section>
+	<script type="text/javascript">
+		$(function(){
+			var obj = $(".regist");
+			console.log(obj)
+			touch.on(obj,"tap",function (e) {
+				console.log(111)
+				$("#reg").animate({
+					"transform" : "translateX(-100%)!important"
+				},1000);
+			})
+		})
+	</script>
+</body>
+</html>

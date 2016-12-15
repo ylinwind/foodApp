@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#bigType_info {display:none;}
+	</style>
+	<script type="text/javascript" src="lib/zepto.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			// 存放所有省市区信息的对象
+			var bigType = {};
+			$("#add_bigType").on("click", function(){
+				$("#bigType_info").show();
+				// 读取 bigType.json 文件中的内容 
+				$.getJSON("kind.json",function(data, textStatus) {
+						/*optional stuff to do after success */
+					var res = data.result; // 所有地区
+					// 遍历所有省份
+					// console.log(res)
+					for (var i = 0, len = res.length; i < len; i++) {
+						var bigKind = res[i]; // 获取到当前遍历到的省份
+						bigType[bigKind.name] = {}; // 相当于 adrress["内蒙古"] = {};
+						var litType = bigKind.list; // 获取当前省份下的所有城市
+						if (!litType)
+							continue;
+						// 遍历当前省份下的所有城市
+						for (var j = 0, l = litType.length; j < l; j++) {
+							var foodKind = litType[j]; // 当前遍历到的城市
+							bigType[bigKind.name][foodKind.name] = foodKind.name; // 相当于 bigType["内蒙古"]["呼伦贝尔"] = [];
+						}
+					}
+					initProvince();
+				})
+			});
+			// 初始化省份信息
+			function initProvince(){
+				console.log(1)
+				var html = "";
+				for (var attr in bigType) {
+					// console.log(attr);
+					html += "<option value='"+ attr +"'>"+ attr +"</option>";
+				}
+				$(html).appendTo(".province");
+
+				// 初始化城市信息
+				initCity();
+			}
+
+			// 初始化城市信息
+			function initCity() {
+				console.log(2)
+				// 获取当前选择的省份名称
+				var prov = $(".province").val();
+				// 根据省份找到 bigType 对象中该属性的值
+				var litType = bigType[prov];
+				// 判断是否有城市
+				if ($.isEmptyObject(litType)){
+					$(".city,.district").empty().hide();
+					return;
+				}
+				console.log("here...")
+				var html = "";
+				for (var attr in litType) {
+					html += "<option value='"+ attr +"'>"+ attr +"</option>";
+				}
+				$(".city").show().empty().append(html);
+			}
+			// 省份选择改变
+			$(".province").on("change", initCity);
+		});
+	</script>
+</head>
+<body>
+	<button id="add_bigType">添加地址</button>
+	<div id="bigType_info">
+		<select class="province"></select>
+		<select class="city"></select>
+	</div>
+	
+</body>
+</html>

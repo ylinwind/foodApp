@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>food</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bhip8554sm4bcsor.css">
+	<!-- <script type="text/javascript" src="lib/jquery-1.11.1.js"></script> -->
+	<script type="text/javascript" src="lib/js/swiper.jquery.min.js"></script>
+	<script type="text/javascript" src="lib/js/swiper.min.js"></script>
+	<script type="text/javascript" src="lib/zepto.min.js"></script>
+	<script type="text/javascript" src="lib/touch.js"></script>
+	<script type="text/javascript" src="lib/fx.js"></script>
+	<!-- <script type="text/javascript" src="lib/touch.min.js"></script> -->
+	<!-- <script type="text/javascript" src="lib/hammer.min.js"></script> -->
+</head>
+<body>
+<!-- side -->
+	<section class="side"></section>
+<!-- header -->
+	<header>
+		<a href="javascript:void(0)">首页</a>
+		<a href="javascript:void(0)">天气预报</a>
+		<a href="javascript:void(0)" class="active">菜谱大全</a>
+		<em id="trans"></em>
+	</header>
+<!-- banner -->
+	<section class="banner">
+		<div class="swiper-container">
+		  	<div class="swiper-wrapper swiperWrapper">
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="ser">
+			<input type="search" placeholder="大家正在搜：好吃的红烧肉" name="">
+			<a href="foodKinds.html" class="icon iconfont icon-search iconSer"></a>
+		</div>
+	</section>
+<!-- 推荐 -->
+	<section class="list">
+		<span class="icon iconfont icon-tuijian-right"></span>
+		<ul>
+		</ul>
+	</section>
+<!-- 菜品分类 -->
+	<section class="foodKind">
+		<p class="kindTit"><a href="javascript:void(0)">川菜<span class="icon iconfont icon-hot"></span></a><a href="foodKinds.html">More-></a></p>
+		<div class="chuanList">
+			<ul>
+				<li></li>
+			</ul>
+		</div>
+		<p class="kindTit"><a href="javascript:void(0)">粤菜<span class="icon iconfont icon-hot"></span></a><a href="foodKinds.html">More-></a></p>
+		<div class="yueList">
+			<ul></ul>
+		</div>
+		<section class="list">
+			<span class="icon iconfont icon-tuijian-right"></span>
+			<ul>
+			</ul>
+		</section>
+	</section>
+<!-- 获取更多 -->
+	<section class="more">
+		<button >更多</button>
+	</section>
+<!-- 站位 -->
+	<section class="blank"></section>
+<!-- 底部 -->
+	<footer>
+		<div>
+			<a href="#" class="icon iconfont icon-shouye2-copy"></a>
+			<a href="#" class="icon iconfont icon-luntan"></a>
+			<a href="#" class="icon iconfont icon-faxian"></a>
+			<a href="#" class="icon iconfont icon-wode"></a>
+		</div>
+	</footer>
+
+<!-- ******************************************************* -->
+	<script type="text/javascript">
+/********滑动侧边栏**/
+	$("body").swipeRight(function(){
+		$(".side").animate({
+			"left" : 0
+		},1000);
+	});
+	$("body").swipeLeft(function(){
+		$(".side").animate({
+			"left" : "-50%"
+		},1000);
+	});		
+/*********滑动头部******/
+	$(function(){
+		changePosit();
+	})
+	function changePosit(){
+		var width = $(".active").css("width"),
+			left = $(".active").offset().left;
+		$("#trans").animate({
+			width : width,
+			left : left
+		}, 1000)
+	}
+	$("header").on("swipeLeft",function(e){
+		if ($(".active").prev("a")) {
+			$(".active").prev().addClass('active');
+			$(".active").next().removeClass('active');
+			changePosit();
+		}
+		return;
+	});
+	$("header").on("swipeRight",function(e){
+		if ($(".active").next("a")) {
+			$(".active").next("a").addClass('active');
+			$(".active").prev("a").removeClass('active');
+			changePosit();
+		}
+		return;
+	});
+/**********获取更多***************/
+	$(".list").eq(1).hide();
+	/*var obj = $(".more").children('button');
+		touch.on(obj,"tap",function (e) {
+		})*/
+		$(".more").children('button').tap(function(e) {
+			var menuId = 0;
+			if (localStorage.menuId) {
+				menuId = localStorage.menuId
+			}
+			else{
+				menuId = 1;
+				localStorage.menuId = 1;
+			}
+			var add = parseInt(localStorage.menuId) + 1;
+			localStorage.menuId = add;
+			if (localStorage.menuId === 350) {
+				localStorage.menuId = 1;
+			}
+			var data = "http://apis.juhe.cn/cook/query.php?menu="+menuId+"&dtype=&pn=&rn=&albums=&=&key=b52e6b0ad30cb22d0c43cf85a29d96ca";
+			$.ajax({
+				url: 'ajax.php',
+				type: 'GET',
+				dataType: 'json',
+				data: {data: data},
+				success : function(json){
+					console.log(json);
+					var res = json.result.data,
+						list = "";
+					for(var i = 1;i<res.length;i++){
+						list += `<li>
+									<a href="foodDetail.html?id=${res[i].id}"><img src=${res[i].albums[0]} alt=""></a>
+									<div>
+										<h2>${res[i].imtro}</h2>
+										<p>${res[i].burden}</p>
+									</div>
+								</li>`;
+					}
+					$(".list").eq(1).children('ul').html(list);
+					$(".list").eq(1).show();
+				}
+			});
+		})
+/*************粤菜***********/
+		$.getJSON('yuecai.json', function(json, textStatus) {
+				var res = json.result.data,
+					str = "";
+				for(var i = 0;i<4;i++){
+					str += `<li>
+								<div>
+									<h3>${res[i].imtro}</h3>
+									<p>${res[i].tags}</p>
+								</div>
+								<a href="foodDetail.html?id=${res[i].id}">
+								<img src=${res[i].albums[0]} alt="">
+								</a>
+							</li>`;
+				}
+				$(".yueList").children('ul').html(str);
+		});
+/********************川菜*********************/
+		$.getJSON('chuancai.json', function(json, textStatus) {
+				var res = json.result.data,
+					str = "";
+				for(var i = 0;i<8;i++){
+					str += `<li>
+							<a href="foodDetail.html?id=${res[i].id}">
+							<img src=${res[i].albums[0]} alt="">
+							</a>
+							<span>${res[i].title}</span>
+							</li>`;
+				}
+				$(".chuanList").children('ul').html(str);
+		});
+/************************banner-&&-推荐*******************************************/		
+		$.getJSON('banner_tuijian.json', function(json, textStatus) {
+			var res =json.result.data,
+				str = "",list="";
+			for(var i = 0;i<6;i++){
+				// console.log(res[i].albums[0]);
+				str += `<div class="swiper-slide slideItem">
+						<a href="foodDetail.html?id=${res[i].id}">
+						<img src=${res[i].albums[0]} alt="">
+						</a>
+						</div>`;
+			}
+			for(var i = 6;i<10;i++){
+				list += `<li>
+							<a href="foodDetail.html?id=${res[i].id}"><img src=${res[i].albums[0]} alt=""></a>
+							<div>
+								<h2>${res[i].imtro}</h2>
+								<p>${res[i].burden}</p>
+							</div>
+						</li>`;
+			}
+			$(".swiperWrapper").html(str);
+			$(".list").eq(0).children('ul').html(list);
+			var mySwiper = new Swiper('.swiper-container', {
+				autoplay: 2000,//可选选项，自动滑动
+				effect : 'coverflow',
+				slidesPerView: 3,
+				centeredSlides: true,
+				loop : true,
+				initialSlide :1,
+			})
+		});
+		var fs = document.documentElement.clientWidth/6.4;
+		console.log(fs);
+		document.getElementsByTagName("html")[0].style.fontSize=fs+"px";
+	</script>
+</body>
+</html>
