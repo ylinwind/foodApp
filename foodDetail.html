@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="lib/css/swiper.min.css">
-	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bhip8554sm4bcsor.css">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bdmd997558ode7b9.css">
 	<script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="lib/js/swiper.min.js"></script>
 </head>
@@ -47,7 +47,7 @@
 				var res = json.result.data, stepStr = "",foodImg ="",intro = "",things = "",tit = "";
 				for(var i = 0 ; i < res.length;i++){
 					if (res[i].id===key[1]) {
-						tit = `<a href="food.html" class="icon iconfont icon-Back"></a>
+						tit = `<a href="index.html" class="icon iconfont icon-Back"></a>
 								<h3>${res[i].title}</h3>`;
 						foodImg = `<img src=${res[i].albums[0]} alt="foodDetail">`;
 						intro = `<p>${res[i].tags}</p>`;

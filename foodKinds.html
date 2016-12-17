@@ -7,186 +7,40 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="lib/css/swiper.min.css">
-	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bhip8554sm4bcsor.css">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bdmd997558ode7b9.css">
 	<!-- <script type="text/javascript" src="lib/jquery-1.11.1.js"></script> -->
 	<script type="text/javascript" src="lib/js/swiper.min.js"></script>
 	<script type="text/javascript" src="lib/zepto.min.js"></script>
 	<script type="text/javascript" src="lib/touch.js"></script>
+	<script type="text/javascript" src="js/work.js"></script>
 	
 </head>
 <body>
 	<header class="detailHead">
-		<a href="food.html" class="icon iconfont icon-Back"></a>
+		<a href="index.html" class="icon iconfont icon-Back"></a>
 		<!-- <input type="search"  placeholder="请填写你的关键字~" name=""> -->
 		<div id="serId" contenteditable="true">
-			
 		</div>
 		<button class="find">搜索</button>
 	</header>
-	
 	<div class="typeList">
 		<ul></ul>
 	</div>
 	<div class="egList">
 		<h3>查询结果：</h3>
-		<ul>
-			
-		</ul>
+		<ul></ul>
 	</div>
 	<footer>
 		<div>
-			<a href="food.html" class="icon iconfont icon-shouye2-copy"></a>
+			<a href="index.html" class="icon iconfont icon-shouye2-copy"></a>
 			<a href="#" class="icon iconfont icon-luntan"></a>
 			<a href="#" class="icon iconfont icon-faxian"></a>
 			<a href="#" class="icon iconfont icon-wode"></a>
 		</div>
 	</footer>
 	<script type="text/javascript">
-		$(".find").tap(function(e){
-			var foodName = $("#serId").text().trim();
-			console.log(foodName)
-			var data = `http://apis.juhe.cn/cook/query.php?key=b52e6b0ad30cb22d0c43cf85a29d96ca&menu=${foodName}&dtype=&pn=&rn=&albums=&`;
-			console.log(e.type);
-			console.log(data);
-			$.ajax({
-				url: 'ajax.php',
-				type: 'GET',
-				dataType: 'json',
-				data: {data: data},
-				success : function(json){
-					console.log(json);
-					var res = json.result.data,
-						str = "";
-					for(var i  = 0 ; i< res.length;i++){
-						str += `<li><a href = "foodDetail.html?id=${res[i].id}">
-									<img src="${res[i].albums[0]}" alt=""></a>
-									<span>${res[i].title}</span>
-								</li>`;
-					}
-					$(".egList").children('ul').html(str);
-				},
-				error:function(xhr,type){
-			        console.log(type);
-			        console.log(xhr);
-				}
-			});
-		});
-	/*******分类查找************/
-		$(function(){
-			var bigType = {};
-			$(window).on("load", function(){
-				$("#bigType_info").show();
-				// 读取 bigType.json 文件中的内容 
-				$.getJSON("kind.json",function(data, textStatus) {
-						/*optional stuff to do after success */
-					var res = data.result; // 所有地区
-					// 遍历所有省份
-					// console.log(res)
-					for (var i = 0, len = res.length; i < len; i++) {
-						var bigKind = res[i]; // 获取到当前遍历到的省份
-						bigType[bigKind.name] = {}; // 相当于 adrress["内蒙古"] = {};
-						var litType = bigKind.list; // 获取当前省份下的所有城市
-						if (!litType)
-							continue;
-						for (var j = 0, l = litType.length; j < l; j++) {
-							var foodKind = litType[j];
-							bigType[bigKind.name][foodKind.name] = foodKind.name;
-						}
-					}
-					initProvince();
-				})
-			});
-			var colors = ['E74B60','4B003D','ADCF56','F18A01','73201A','3186C7','D01A0C'];
-			// 初始化省份信息
-			function initProvince(){
-				var html = "",
-					test = "";
-				for (var attr in bigType) {
-					var num = parseInt(Math.random()*colors.length);
-					test +="<li><span class='icon iconfont icon-heart'"+
-								"style='color:#"+colors[num]+"'></span>"+attr+"</li>";
-				}
-				$(".typeList").children('ul').html(test);
-				$(".typeList").find("li").tap(function(e){
-					var _name = this.innerText,
-						str = `<span>${this.innerText}<em class="icon iconfont icon-cancel"></em></span>`;
-					// $("#serId").val(this.innerText);
-					$("#serId").append(str);
-					initCity(_name);
-				});
-				
-			}
-			function initCity(_name) {
-				// var prov = $("#serId").val();
-				var prov = $("#serId").children('span').text();
-				console.log(prov);
-				var litType = bigType[prov];
-				var html = "",
-					test = "";
-				for (var attr in litType) {
-					var num = parseInt(Math.random()*colors.length);
-					test +="<li><span class='icon iconfont icon-heart'"+
-								"style='color:#"+colors[num]+"'></span>"+attr+"</li>";
-				}
-				$(".typeList").children('ul').html(test);
-				$(".typeList").find("li").tap(function(e){
-					var name_ =  this.innerText,
-						id = 0,
-						_data = "",
-						str = `<span>${this.innerText}<em class="icon iconfont icon-cancel"></em></span>`;
-						$("#serId").append(str);
-
-					$.getJSON("kind.json",function(json, textStatus) {
-						var res = json.result,
-							lis = [],
-							str = "";
-							console.log(name_+":"+_name);
-						for(var i = 0 ; i < res.length;i++){
-							// console.log(res[i]);
-							if (res[i].name === _name) {
-								// console.log(res[i].list);
-								var lis = res[i].list;
-								for(var j  = 0 ; j < lis.length;j++){
-									if (lis[j].name===name_) {
-										id = lis[j].id;
-										console.log(lis[j]);
-										
-									}
-								}
-								
-							}
-						}
-						_data = "http://apis.juhe.cn/cook/index?key=b52e6b0ad30cb22d0c43cf85a29d96ca&cid="+id+"";
-						console.log(_data);
-						$.ajax({
-						url: 'ajax.php',
-						type: 'GET',
-						dataType: 'json',
-						data: {data: _data},
-						success:function(json){
-							console.log(json);
-							var res = json.result.data,
-								str = "";
-							for(var i  = 0 ; i< res.length;i++){
-								str += `<li><a href = "foodDetail.html?id=${res[i].id}">
-											<img src="${res[i].albums[0]}" alt=""></a>
-											<span>${res[i].title}</span>
-										</li>`;
-							}
-							$(".egList").children('ul').html(str);
-						},
-						 error:function(xhr,type){
-						        console.log(type);
-						        console.log(xhr);
-					        }
-						})
-					});
-					$("#serId").val(this.innerText);
-				});
-			}
-		});
+		
 		var fs = document.documentElement.clientWidth/6.4;
-		console.log(fs);
 		document.getElementsByTagName("html")[0].style.fontSize=fs+"px";
 	</script>
 </body>

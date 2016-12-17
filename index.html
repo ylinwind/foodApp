@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>food</title>
+	<link rel="icon" href="imgs/food.png">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bdmd997558ode7b9.css">
+	<!-- <script type="text/javascript" src="lib/jquery-1.11.1.js"></script> -->
+	<script type="text/javascript" src="lib/js/swiper.jquery.min.js"></script>
+	<script type="text/javascript" src="lib/js/swiper.min.js"></script>
+	<script type="text/javascript" src="lib/zepto.min.js"></script>
+	<script type="text/javascript" src="lib/touch.js"></script>
+	<script type="text/javascript" src="lib/fx.js"></script>
+	<script type="text/javascript" src="js/work.js"></script>
+	<!-- <script type="text/javascript" src="lib/touch.min.js"></script> -->
+	<!-- <script type="text/javascript" src="lib/hammer.min.js"></script> -->
+</head>
+<body>
+<!-- side -->
+	<section class="side">
+		<div class="detailInfo"></div>
+		<p class="user"><img src="imgs/touxiang.png" alt=""><a href="login.html"></a></p>
+		<ul>
+			<li><a href="javascript:void(0)">了解会员特权</a></li>
+			<li><a href="javascript:void(0)">我的收藏</a></li>
+			<li><a href="javascript:void(0)">我的名片夹</a></li>
+			<li><a href="javascript:void(0)">我的料理</a></li>
+			<li><a href="javascript:void(0)">我的评论</a></li>
+		</ul>
+		<p class="userTip">
+			<span class="icon iconfont icon-shezhi"></span>
+			<span class="icon iconfont icon-yejian"></span>
+			<span class="icon iconfont icon-area"></span>
+		</p>
+	</section>
+<!-- header -->
+	<header>
+		<a href="javascript:void(0)">首页</a>
+		<a href="javascript:void(0)">天气预报</a>
+		<a href="javascript:void(0)" class="active">菜谱大全</a>
+		<em id="trans"></em>
+	</header>
+<!-- banner -->
+	<section class="banner">
+		<div class="swiper-container">
+		  	<div class="swiper-wrapper swiperWrapper">
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="ser">
+			<input type="search" placeholder="大家正在搜：好吃的红烧肉" name="">
+			<a href="foodKinds.html" class="icon iconfont icon-search iconSer"></a>
+		</div>
+	</section>
+<!-- 推荐 -->
+	<section class="list">
+		<span class="icon iconfont icon-tuijian-right"></span>
+		<ul>
+		</ul>
+	</section>
+<!-- 菜品分类 -->
+	<section class="foodKind">
+		<p class="kindTit"><a href="javascript:void(0)">川菜<span class="icon iconfont icon-hot"></span></a><a href="foodKinds.html">More-></a></p>
+		<div class="chuanList">
+			<ul>
+				<li></li>
+			</ul>
+		</div>
+		<p class="kindTit"><a href="javascript:void(0)">粤菜<span class="icon iconfont icon-hot"></span></a><a href="foodKinds.html">More-></a></p>
+		<div class="yueList">
+			<ul></ul>
+		</div>
+		<section class="list">
+			<span class="icon iconfont icon-tuijian-right"></span>
+			<ul>
+			</ul>
+		</section>
+	</section>
+<!-- 获取更多 -->
+	<section class="more">
+		<button >更多</button>
+	</section>
+<!-- 站位 -->
+	<section class="blank"></section>
+<!-- 底部 -->
+	<footer>
+		<div>
+			<a href="#" class="icon iconfont icon-shouye2-copy"></a>
+			<a href="#" class="icon iconfont icon-luntan"></a>
+			<a href="#" class="icon iconfont icon-faxian"></a>
+			<a href="javascript:void(0)" class="icon iconfont icon-wode"></a>
+		</div>
+	</footer>
+
+<!-- ******************************************************* -->
+	<script type="text/javascript">
+		// 判断登录用户
+		$(function(){
+			var name = location.search.slice(1).split("=")[1];
+			if(typeof name === "undefined"){
+				$(".user").find('a').text('请登录');
+			}
+			else{
+				$(".user").find('a').text(name);
+			}
+		});
+		var fs = document.documentElement.clientWidth/6.4;
+		document.getElementsByTagName("html")[0].style.fontSize=fs+"px";
+	</script>
+</body>
+</html>

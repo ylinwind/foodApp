@@ -3,52 +3,134 @@
 <head>
 	<meta charset="UTF-8">
 	<title>login</title>
+	<link rel="icon" href="imgs/food.png">
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bdmd997558ode7b9.css">
 	<style type="text/css">
 		html,body{height: 100%;width: 100%;}
-		html{font-size: 15.625vw;}
-		body{background: url(imgs/cook.jpg);background-size: cover;}
-		.loginCent{height: 100%;width: 100%;background: rgba(200,200,200,0.3);display: flex;
-			justify-content: center;align-items: center;position: relative;/*overflow: hidden;*/}
-		.login{display: flex;justify-content: center;align-items: center;flex-wrap: wrap;}
-		.login input{border:none;background: none;color: #fff;border-bottom: 1px solid #fff;
-			width: 70vw;font-size: 6vw;outline: none;padding:3vw;}
-		input::-webkit-input-placeholder{color: #333;}
-		.login button,.regist{background:rgba(10,86,200,0.5);border:none;color: #fff;font-size: 6vw;padding:2vw 5vw;border-radius: 10px;}
-		#reg{position: absolute;transform: translateX(100%);}
+		html{font-size: 15.625vw;font-family: "黑体",font-weight:300;}
+		body{background: url(imgs/fresh3.jpg);background-size: cover;}
+		article div{position: relative;margin: 0;padding:0;overflow: hidden;border-bottom: 5px solid #fff;}
+		article div em{position: absolute;top: 0;right: 0;width: 90%;font-size: 0.2rem;color: #FE6577;border:1px solid #1BC1FE;padding:0.1rem;text-align: center;
+			border-radius: 20px;}
+		article div em i{border-top: 0.2rem solid #1BC1FE;border-right: 0.2rem solid transparent;
+			border-left: 0.2rem solid transparent;position: absolute;bottom: -0.2rem;right: 5px;}
+		.icon-login,.icon-password{position: absolute;left: 0;bottom: 0.2rem; font-size: 0.5rem;
+			color: #fff;}
+		.loginCent{height: 100%;width: 100%;background: rgba(40,81,99,0.7);display: flex;
+			justify-content: center;align-items: center;position: relative;overflow: hidden;
+			flex-flow: column;}
+		.login,#reg{display: flex;justify-content: center;align-items: center;flex-wrap: wrap;}
+		.login input,#reg input{border:none;background: none;color: #fff;width: 70vw;font-size: 6vw;outline: none;padding:3vw;text-indent: 0.4rem;}
+		input::-webkit-input-placeholder{color: #fff;font-weight: 300;font-size:0.3rem;}
+		article p {display: flex;justify-content: center;text-align: center;flex-wrap: wrap;
+			flex-flow: column;}
+		button,.regist{border:none;color: #fff;font-size: 6vw;
+			padding:2vw 25vw;border-radius: 10px;margin-bottom: 0.2rem;border-radius: 0.2rem;}
+		button{background: #1BC1FE;}
+		.regist{border:2px solid #1BC1FE;color: #1BC1FE;}
+		#reg{position: absolute;left: 100%;}
+		.gap{text-align: center;margin:0;font-size: 0.25rem;width: 60vw;display: flex;align-items: center;position: absolute;bottom: 2rem;}
+		.gap em{background: url(imgs/loginGap.png) center repeat;display: block;width: 18vw;height:3px;}
+		.gap span{margin:0 0.1rem;color: #fff;background:rgba(40,81,99) }
+		.other{display: flex;justify-content: space-around;align-items: center;margin-top:0.3rem;
+			width: 70vw;position: absolute;bottom: 0;}
+		.icon-qq,.icon-weibo,.icon-weixin{font-size: 0.5rem; color: #fff;}
 	</style>
 	<script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="lib/touch.min.js"></script>
 </head>
 <body>
 	<section class="loginCent">
-		<form class="login">
-			<input type="text" name="username" placeholder="请输入用户名">
-			<input type="password" name="password" placeholder="请输入密码">
+		<article class="login">
+			<div>
+			<!-- <em>word<i></i></em> -->
+				<span class="icon iconfont icon-login"></span>
+			<input type="text" class="name" name="username" placeholder="请输入用户名"></div>
+			
+			<div>
+				<span class="icon iconfont icon-password"></span>
+			<input type="password" class="psw" name="password" placeholder="请输入密码"></div>
 			<p>
-				<button>登录</button>
+				<button class="log">登录</button>
 				<a class="regist">注册</a>
 			</p>
-		</form>
-		<form class="login" id="reg">
-			<input type="text" name="username" placeholder="请输入用户名">
-			<input type="password" name="password" placeholder="请输入密码">
+		</article>
+		<article id="reg">
+			<div>
+				<span class="icon iconfont icon-login"></span>
+			<input type="text" class="name" name="username" placeholder="请输入用户名"></div>
+			
+			<div>
+				<span class="icon iconfont icon-password"></span>
+			<input type="password" class="psw" name="password" placeholder="请输入密码"></div>
 			<p>
-				<button>立即注册</button>
+				<button class="regs">立即注册</button>
 			</p>
-		</form>
+		</article>
+		<p class="gap">
+			<em></em>
+			<span>第三方登录</span>
+			<em></em>
+		</p>
+		<p class="other">
+			<span class="icon iconfont icon-qq"></span>
+			<span class="icon iconfont icon-weibo"></span>
+			<span class="icon iconfont icon-weixin"></span>
+		</p>
 	</section>
 	<script type="text/javascript">
 		$(function(){
 			var obj = $(".regist");
-			console.log(obj)
 			touch.on(obj,"tap",function (e) {
-				console.log(111)
 				$("#reg").animate({
-					"transform" : "translateX(-100%)!important"
+					"left" : "0"
 				},1000);
-			})
+				$(".login").hide();
+			});
+			$(".name").on("blur",function(){
+				var reg = new RegExp(/^[a-zA-Z]\w{5,15}$/ig);
+				if(!reg.test($(this).val())){
+					$(this).parent("div").children('em').remove().end().append('<em>用户名格式不对啊~<i></i></em>')
+				}
+			});
+			$(".psw").on('blur',function(event) {
+				event.preventDefault();
+				/* Act on the event */
+				var reg = new RegExp(/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,22}$/);
+				if(!reg.test($(this).val())){
+					$(this).parent("div").prev("div").children('em').remove().end().append('<em>密码格式不对啊~<i></i></em>')
+				}
+			});
 		})
+		touch.on(".log","tap",function (e) {
+			var name = $(this).parents("article").find('.name').val(),
+				psw = $(this).parents("article").find('.psw').val();
+				console.log(name+":"+psw);
+			sendInfo("login.php",name,psw,"index.html?name="+name+"");
+		});
+		touch.on(".regs","tap",function (e) {
+			var name = $(this).parents("article").find('.name').val(),
+				psw = $(this).parents("article").find('.psw').val();
+				console.log(name+":"+psw);
+			sendInfo("register.php",name,psw,"login.html");
+		});
+		function sendInfo(url,name,psw,newUrl){
+			$.ajax({
+				url: url,
+				type: 'POST',
+				dataType: 'json',
+				data: {username: name,
+						password : psw},
+			})
+			.done(function(json) {
+				console.log(json);
+				if (json.status === 0) {
+					open(newUrl,'_self');
+				}
+				return;
+			});
+		}
 	</script>
 </body>
 </html>

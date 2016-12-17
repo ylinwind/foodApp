@@ -8,7 +8,20 @@ header em{position: absolute;bottom: 0;display: block;height: 3px;background: #f
 	}
 /*header a.active{border-bottom: 2px solid #fff;}*/
 .blank{height: 44px;}
-.side{width: 50%;height: 100%;background: #ccc;position: fixed;left: -50%;z-index: 2;}
+.side{width: 50%;height: 100%;background:#2E84C6;position: fixed;left: -50%;z-index: 2;
+	font-size: 0.3rem;}
+.detailInfo{position: absolute;right: -100%;top: 0;width:0;height:0;background: #fff;
+	opacity: 0;display: flex;justify-content: center;align-items: center;color: #333;}
+.user{display: flex;justify-content: space-around;align-items: center;}
+.user img{border-radius: 100%;width: 1rem;border:1px solid #ccc;}
+.side a{color: #fff;}
+.side ul{display: flex;flex-direction: column; justify-content: space-around;
+	 margin:0;padding:0;height: 40vh;text-align: center;}
+.side ul li{list-style: none;}
+.userTip{position: absolute;bottom: 0;display: flex;justify-content: space-around;width: 100%;}
+.icon{font-size: 0.4rem!important;}
+.userTip .icon{color: #fff;}
+/*.side ul li a{width: 30vw;display: block;}*/
 /****************/
 .banner{background: url(../imgs/bannerBg.jpg);background-size:100%;}
 .slideItem img{width: 30vw;}
@@ -19,7 +32,7 @@ header em{position: absolute;bottom: 0;display: block;height: 3px;background: #f
 	border:1px solid #999;text-indent: 0.4rem;}
 .list{overflow: hidden;background: url(../imgs/titBg.png) center right no-repeat;
 	background-size: cover;position: relative;}
-.list span{position: absolute;right: 0;top: 0;color: #f00;font-size: 1rem;}
+.list span{position: absolute;right: 0;top: 0;color: #f00;font-size: 1rem!important;}
 .list ul{padding:10px;margin:0;}
 .list li{display: flex;justify-content: space-between;align-items: center;
 	margin-bottom: 10px;background:rgba(255,255,255,0.8);padding:5px;}
@@ -102,9 +115,5 @@ footer div a{color: #999;font-size: 5rem}
 .egList ul li span{position: absolute;font-size: 0.12rem;left: 50%;top: 50%;
 transform: translateX(-50%);color: #fff;width: 20vw;display: block;text-align: center;}
 .egList h3{font-size: 0.24rem;color: #333;font-weight: 600;}
-
-@keyframes ani{
-	
-}
 
 	
